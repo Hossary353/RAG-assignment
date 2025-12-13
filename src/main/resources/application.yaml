@@ -1,4 +1,6 @@
 server:
+  servlet:
+    context-path: /rag-chat
   port: ${SERVER_PORT}
 spring:
   config:
