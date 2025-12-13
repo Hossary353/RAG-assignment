@@ -1,3 +1,24 @@
+server:
+  port: 8081
 spring:
   application:
     name: assignment
+  datasource:
+    url: jdbc:postgresql://localhost:5432/ragchat?currentSchema=rag
+    username: postgres
+    password: password
+  jpa:
+    properties:
+      hibernate:
+        default_schema: rag
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+    hibernate:
+      ddl-auto: update
+    open-in-view: false
+  sql:
+    init:
+      continue-on-error: true
+      mode: always
+security:
+  api-key: ${API_KEY}
+
