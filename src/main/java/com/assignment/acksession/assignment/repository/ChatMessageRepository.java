@@ -8,5 +8,4 @@ import org.springframework.data.repository.CrudRepository;
 import java.util.UUID;
 
 public interface ChatMessageRepository extends CrudRepository<ChatMessage, UUID> {
-    Page<ChatMessage> findBySessionId(UUID sessionId, Pageable pageable);
 }
