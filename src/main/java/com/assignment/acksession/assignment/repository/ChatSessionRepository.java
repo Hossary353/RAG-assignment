@@ -8,6 +8,6 @@ import java.util.UUID;
 
 public interface ChatSessionRepository extends CrudRepository<ChatSession, UUID> {
     List<ChatSession> findAllByUserIdOrderByUpdatedAtDesc(String userId);
-    List<ChatSession> findByUserId(String userId);
-    ChatSession findByIdAndUserId(UUID id,String userId);
+
+    ChatSession findByIdAndUserId(UUID id, String userId);
 }

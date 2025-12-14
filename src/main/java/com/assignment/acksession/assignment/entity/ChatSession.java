@@ -1,13 +1,15 @@
 package com.assignment.acksession.assignment.entity;
 
-import jakarta.persistence.*;
+import jakarta.persistence.CascadeType;
+import jakarta.persistence.Entity;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.Table;
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.UUID;
 
 
 @Entity
@@ -17,7 +19,7 @@ import java.util.UUID;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class ChatSession extends BasicEntity{
+public class ChatSession extends BasicEntity {
 
     private String userId;
 
@@ -26,7 +28,8 @@ public class ChatSession extends BasicEntity{
     private boolean favourite;
 
     @OneToMany(mappedBy = "chatSession", cascade = CascadeType.ALL, orphanRemoval = true)
-    List<ChatMessage> chatMessages = new ArrayList<>();;
+    List<ChatMessage> chatMessages = new ArrayList<>();
+    ;
 
     @CreationTimestamp
     private LocalDateTime createdAt;

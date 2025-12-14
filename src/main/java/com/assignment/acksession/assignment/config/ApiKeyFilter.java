@@ -27,8 +27,8 @@ public class ApiKeyFilter extends OncePerRequestFilter {
         String key = request.getHeader("X-API-KEY");
         if (!apiKey.equals(key)) {
             response.setStatus(HttpStatus.UNAUTHORIZED.value());
-            filterChain.doFilter(request,response);
-        }else {
+            filterChain.doFilter(request, response);
+        } else {
             Authentication auth =
                     new UsernamePasswordAuthenticationToken(
                             "api-user",

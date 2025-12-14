@@ -34,6 +34,7 @@ public class ChatSessionService {
         var saved = chatSessionRepository.save(chatSession);
         return mapper.transform(saved);
     }
+
     @Transactional(readOnly = true)
     public List<SessionResponse> retrieveSessions(String userId) {
         var sessionEntity = chatSessionRepository.findAllByUserIdOrderByUpdatedAtDesc(userId);
@@ -42,10 +43,10 @@ public class ChatSessionService {
 
     public SessionResponse markFavourite(SessionRequest sessionRequest, boolean favourite) {
 
-        var chatSession = chatSessionRepository.findByIdAndUserId(UUID.fromString(sessionRequest.getSessionId()),sessionRequest.getUserId());
-        if (chatSession ==null){
+        var chatSession = chatSessionRepository.findByIdAndUserId(UUID.fromString(sessionRequest.getSessionId()), sessionRequest.getUserId());
+        if (chatSession == null) {
             throw new HttpClientErrorException(HttpStatus.NOT_FOUND);
-        }else {
+        } else {
             chatSession.setFavourite(favourite);
             chatSession.setUpdatedAt(LocalDateTime.now());
             var saved = chatSessionRepository.save(chatSession);
@@ -56,10 +57,10 @@ public class ChatSessionService {
     }
 
     public SessionResponse renameSession(SessionRequest sessionRequest, String name) {
-        var chatSession = chatSessionRepository.findByIdAndUserId(UUID.fromString(sessionRequest.getSessionId()),sessionRequest.getUserId());
-        if (chatSession ==null){
+        var chatSession = chatSessionRepository.findByIdAndUserId(UUID.fromString(sessionRequest.getSessionId()), sessionRequest.getUserId());
+        if (chatSession == null) {
             throw new HttpClientErrorException(HttpStatus.NOT_FOUND);
-        }else {
+        } else {
             chatSession.setTitle(name);
             chatSession.setUpdatedAt(LocalDateTime.now());
             var saved = chatSessionRepository.save(chatSession);
@@ -69,14 +70,24 @@ public class ChatSessionService {
     }
 
     public DeleteResponse deleteSession(SessionRequest sessionRequest) {
-        var chatSession = chatSessionRepository.findByIdAndUserId(UUID.fromString(sessionRequest.getSessionId()),sessionRequest.getUserId());
-        if (chatSession ==null){
+        var chatSession = chatSessionRepository.findByIdAndUserId(UUID.fromString(sessionRequest.getSessionId()), sessionRequest.getUserId());
+        if (chatSession == null) {
             throw new HttpClientErrorException(HttpStatus.NOT_FOUND);
-        }else {
+        } else {
 
             chatSessionRepository.delete(chatSession);
             return new DeleteResponse("Record Deleted");
         }
 
+    }
+
+    public ChatSession getSessionById(String userId, String sessionId) {
+
+        var session = chatSessionRepository.findByIdAndUserId(UUID.fromString(sessionId), userId);
+        if (session == null) {
+            throw new HttpClientErrorException(HttpStatus.NOT_FOUND);
+        }
+
+        return session;
     }
 }

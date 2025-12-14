@@ -1,5 +1,6 @@
 package com.assignment.acksession.assignment.model;
 
+import com.assignment.acksession.assignment.entity.Sender;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -11,17 +12,18 @@ import java.time.LocalDateTime;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class SessionResponse {
+public class MessageResponse {
 
     private String id;
 
-    private String userId;
+    private String sessionId;
 
-    private String title;
+    private Sender sender;
 
-    private boolean favourite;
+    private String content;
 
-    private LocalDateTime createdAt;
+    private String context;
 
-    private LocalDateTime updatedAt;
+    private LocalDateTime createdAt = LocalDateTime.now();
+
 }
