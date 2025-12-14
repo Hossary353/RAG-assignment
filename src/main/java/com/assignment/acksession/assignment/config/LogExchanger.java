@@ -9,6 +9,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.web.filter.OncePerRequestFilter;
 
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 
 @Configuration
 @Slf4j
@@ -19,22 +20,26 @@ public class LogExchanger extends OncePerRequestFilter {
         long startTime = System.currentTimeMillis();
 
         CustomHttpServletRequestWrapper requestPayload = new CustomHttpServletRequestWrapper(request);
+        CustomHttpServletResponseWrapper responseWrapper = new CustomHttpServletResponseWrapper(response);
+
+
         try {
-            log.info("HTTP [method]: [{}] ----->  [endpoint]: {}    [body]: {}",
+            log.info("HTTP [method]: [{}] ----->  [endpoint]: {}    [payload]: {}",
                     requestPayload.getMethod(),
                     requestPayload.getRequestURI(), requestPayload);
 
-            filterChain.doFilter(requestPayload, response);
+            filterChain.doFilter(requestPayload, responseWrapper);
         } finally {
-
+            response.getOutputStream().write(responseWrapper.getBody().getBytes(StandardCharsets.UTF_8));
             long duration = System.currentTimeMillis() - startTime;
 
-            log.info("HTTP [method]: [{}] <----- [endpoint]: {} [status]: [{}] [duration]: [{} ms]  [headers]:[{}]",
+            log.info("HTTP [method]: [{}] <----- [endpoint]: {} [status]: [{}] [duration]: [{} ms]  [response body]:{}  [headers]:[{}]",
                     requestPayload.getMethod(),
                     requestPayload.getRequestURI(),
-                    response.getStatus(),
+                    responseWrapper.getStatus(),
                     duration,
-                    response.getHeaderNames());
+                    responseWrapper.getBody(),
+                    responseWrapper.getHeaderNames());
         }
     }
 }
