@@ -25,7 +25,7 @@ public class ApiKeyFilter extends OncePerRequestFilter {
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
         String key = request.getHeader("X-API-KEY");
-        if (!apiKey.equals(key)) {
+        if (request.getRequestURI().contains("/v1") && !apiKey.equals(key)) {
             response.setStatus(HttpStatus.UNAUTHORIZED.value());
             filterChain.doFilter(request, response);
         } else {

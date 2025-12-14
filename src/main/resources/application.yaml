@@ -24,6 +24,27 @@ spring:
     init:
       continue-on-error: true
       mode: always
+management:
+  info:
+    env:
+      enabled: true
+  endpoints:
+    web:
+      exposure:
+        include: health,info,metrics,env,loggers
+  endpoint:
+    health:
+      show-details: always
+    info:
+      show-details: always
 security:
   api-key: ${API_KEY}
 
+info:
+  app:
+    name: RAG-Assignment
+    description: Service to handle storing and retrieving chat history
+    version: 1.0
+    environment: Production
+    support:
+      email: ahmed.sayed.elhossary@gmail.com
