@@ -18,19 +18,23 @@ public class LogExchanger extends OncePerRequestFilter {
 
         long startTime = System.currentTimeMillis();
 
+        CustomHttpServletRequestWrapper requestPayload = new CustomHttpServletRequestWrapper(request);
         try {
-            log.info("HTTP {} ----->  {}",
-                    request.getMethod(),
-                    request.getRequestURI());
-            filterChain.doFilter(request, response);
+            log.info("HTTP [method]: [{}] ----->  [endpoint]: {}    [body]: [{}]",
+                    requestPayload.getMethod(),
+                    requestPayload.getRequestURI(), requestPayload);
+
+            filterChain.doFilter(requestPayload, response);
         } finally {
+
             long duration = System.currentTimeMillis() - startTime;
 
-            log.info("HTTP {} <-----  {} status: {} duration: {} ms",
-                    request.getMethod(),
-                    request.getRequestURI(),
+            log.info("HTTP [method]: [{}] <----- [endpoint]: {} [status]: [{}] [duration]: [{} ms]  [headers]:[{}]",
+                    requestPayload.getMethod(),
+                    requestPayload.getRequestURI(),
                     response.getStatus(),
-                    duration);
+                    duration,
+                    response.getHeaderNames());
         }
     }
 }

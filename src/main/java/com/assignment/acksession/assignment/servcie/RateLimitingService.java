@@ -14,8 +14,8 @@ public class RateLimitingService {
     private final ConcurrentMap<String, Bucket> cache = new ConcurrentHashMap<>();
 
     private static final Bandwidth LIMIT = Bandwidth.builder()
-            .capacity(3)
-            .refillIntervally(5, Duration.ofMinutes(1))
+            .capacity(5)
+            .refillIntervally(10, Duration.ofSeconds(10))
             .build();
 
 

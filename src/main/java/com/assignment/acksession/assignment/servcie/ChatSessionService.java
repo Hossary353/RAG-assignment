@@ -45,7 +45,7 @@ public class ChatSessionService {
 
         var chatSession = chatSessionRepository.findByIdAndUserId(UUID.fromString(sessionRequest.getSessionId()), sessionRequest.getUserId());
         if (chatSession == null) {
-            throw new HttpClientErrorException(HttpStatus.NOT_FOUND);
+            throw new HttpClientErrorException(HttpStatus.NOT_FOUND,"Session Not Found");
         } else {
             chatSession.setFavourite(favourite);
             chatSession.setUpdatedAt(LocalDateTime.now());
@@ -59,7 +59,7 @@ public class ChatSessionService {
     public SessionResponse renameSession(SessionRequest sessionRequest, String name) {
         var chatSession = chatSessionRepository.findByIdAndUserId(UUID.fromString(sessionRequest.getSessionId()), sessionRequest.getUserId());
         if (chatSession == null) {
-            throw new HttpClientErrorException(HttpStatus.NOT_FOUND);
+            throw new HttpClientErrorException(HttpStatus.NOT_FOUND,"Session Not Found");
         } else {
             chatSession.setTitle(name);
             chatSession.setUpdatedAt(LocalDateTime.now());
@@ -72,7 +72,7 @@ public class ChatSessionService {
     public DeleteResponse deleteSession(SessionRequest sessionRequest) {
         var chatSession = chatSessionRepository.findByIdAndUserId(UUID.fromString(sessionRequest.getSessionId()), sessionRequest.getUserId());
         if (chatSession == null) {
-            throw new HttpClientErrorException(HttpStatus.NOT_FOUND);
+            throw new HttpClientErrorException(HttpStatus.NOT_FOUND,"Session Not Found");
         } else {
 
             chatSessionRepository.delete(chatSession);
@@ -85,7 +85,7 @@ public class ChatSessionService {
 
         var session = chatSessionRepository.findByIdAndUserId(UUID.fromString(sessionId), userId);
         if (session == null) {
-            throw new HttpClientErrorException(HttpStatus.NOT_FOUND);
+            throw new HttpClientErrorException(HttpStatus.NOT_FOUND,"Session Not Found");
         }
 
         return session;
