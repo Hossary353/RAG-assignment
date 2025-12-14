@@ -20,7 +20,7 @@ public class LogExchanger extends OncePerRequestFilter {
 
         CustomHttpServletRequestWrapper requestPayload = new CustomHttpServletRequestWrapper(request);
         try {
-            log.info("HTTP [method]: [{}] ----->  [endpoint]: {}    [body]: [{}]",
+            log.info("HTTP [method]: [{}] ----->  [endpoint]: {}    [body]: {}",
                     requestPayload.getMethod(),
                     requestPayload.getRequestURI(), requestPayload);
 
