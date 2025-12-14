@@ -3,6 +3,8 @@ server:
     context-path: /rag-chat
   port: ${SERVER_PORT}
 spring:
+  main:
+    allow-bean-definition-overriding: true
   config:
     import: optional:file:.env
 
@@ -39,6 +41,10 @@ management:
       show-details: always
 security:
   api-key: ${API_KEY}
+
+springdoc:
+  swagger-ui:
+    enabled: true
 
 info:
   app:
