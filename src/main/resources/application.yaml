@@ -11,13 +11,13 @@ spring:
   application:
     name: assignment
   datasource:
-    url: jdbc:postgresql://${DB_HOST:localhost}:5432/ragchat?currentSchema=rag
+    url: jdbc:postgresql://${DB_HOST:localhost}:5432/postgres?currentSchema=public
     username: ${DB_USER}
     password: ${DB_PASS}
   jpa:
     properties:
       hibernate:
-        default_schema: rag
+        default_schema: public
     database-platform: org.hibernate.dialect.PostgreSQLDialect
     hibernate:
       ddl-auto: update
