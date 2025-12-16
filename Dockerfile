@@ -1,27 +1,21 @@
-version: "3.8"
+FROM maven:3.9.6-eclipse-temurin-17 AS build
 
-services:
-  api:
-    build: .
-    env_file: .env
-    ports:
-      - "8080:8080"
-    depends_on:
-      - db
+WORKDIR /app
 
-  db:
-    image: postgres:16
-    environment:
-      POSTGRES_DB: ragchat
-      POSTGRES_USER: admin
-      POSTGRES_PASSWORD: admin
-    ports:
-      - "5432:5432"
+COPY pom.xml .
+RUN mvn dependency:go-offline
 
-  pgadmin:
-    image: dpage/pgadmin4
-    environment:
-      PGADMIN_DEFAULT_EMAIL: admin@example.com
-      PGADMIN_DEFAULT_PASSWORD: admin
-    ports:
-      - "5050:80"
+COPY src ./src
+RUN mvn package -DskipTests
+FROM eclipse-temurin:17-jre-focal AS final
+
+RUN groupadd --system appuser && useradd --system --gid appuser appuser
+USER appuser
+
+EXPOSE 8081
+
+ARG JAR_FILE=target/*.jar
+
+COPY --from=build /app/${JAR_FILE} assignment-1.0.jar
+
+ENTRYPOINT ["java", "-jar", "/assignment-1.0.jar"]
