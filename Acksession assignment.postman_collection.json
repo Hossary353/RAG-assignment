@@ -1,0 +1,272 @@
+{
+	"info": {
+		"_postman_id": "e58cb206-435d-4d63-906b-ec71c59e2673",
+		"name": "Acksession assignment",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "24129755"
+	},
+	"item": [
+		{
+			"name": "session management",
+			"item": [
+				{
+					"name": "create session",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "X-API-KEY",
+								"value": "BNkYD9DBOKh7JVQPHtzUSKOggnZqyKAa",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8081/rag-chat/v1/session?userId=1223425",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8081",
+							"path": [
+								"rag-chat",
+								"v1",
+								"session"
+							],
+							"query": [
+								{
+									"key": "userId",
+									"value": "1223425"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "mark favourite",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "X-API-KEY",
+								"value": "BNkYD9DBOKh7JVQPHtzUSKOggnZqyKAa",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"userId\": \"1223425\",\r\n    \"sessionId\": \"38b8cf81-3bcf-4de1-8d03-4de16f22e3b1\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8081/rag-chat/v1/session/favourite/true",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8081",
+							"path": [
+								"rag-chat",
+								"v1",
+								"session",
+								"favourite",
+								"true"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "rename session",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "X-API-KEY",
+								"value": "BNkYD9DBOKh7JVQPHtzUSKOggnZqyKAa",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"userId\": \"1223425\",\r\n    \"sessionId\": \"d845988c-3db4-4416-a59c-f43596c6d8a9\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8081/rag-chat/v1/session/rename/app message",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8081",
+							"path": [
+								"rag-chat",
+								"v1",
+								"session",
+								"rename",
+								"app message"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete session",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "X-API-KEY",
+								"value": "BNkYD9DBOKh7JVQPHtzUSKOggnZqyKAa",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"userId\": \"1223425\",\r\n    \"sessionId\": \"c9d48bbe-8e3b-4972-83a2-83c385e4b7be\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8081/rag-chat/v1/session/delete",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8081",
+							"path": [
+								"rag-chat",
+								"v1",
+								"session",
+								"delete"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "list sessions",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-API-KEY",
+								"value": "BNkYD9DBOKh7JVQPHtzUSKOggnZqyKAa",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8081/rag-chat/v1/session?userId=1223425",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8081",
+							"path": [
+								"rag-chat",
+								"v1",
+								"session"
+							],
+							"query": [
+								{
+									"key": "userId",
+									"value": "1223425"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "messaging management",
+			"item": [
+				{
+					"name": "send Message",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "X-API-KEY",
+								"value": "BNkYD9DBOKh7JVQPHtzUSKOggnZqyKAa",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"sessionId\":\"d845988c-3db4-4416-a59c-f43596c6d8a9\",\r\n    \"userId\":\"1223425\",\r\n    \"message\": \"help me with this \"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8081/rag-chat/v1/message",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8081",
+							"path": [
+								"rag-chat",
+								"v1",
+								"message"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "retrieve messages",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-API-KEY",
+								"value": "BNkYD9DBOKh7JVQPHtzUSKOggnZqyKAa",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8081/rag-chat/v1/message?userId=1223425&sessionId=d845988c-3db4-4416-a59c-f43596c6d8a9",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8081",
+							"path": [
+								"rag-chat",
+								"v1",
+								"message"
+							],
+							"query": [
+								{
+									"key": "userId",
+									"value": "1223425"
+								},
+								{
+									"key": "sessionId",
+									"value": "d845988c-3db4-4416-a59c-f43596c6d8a9"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
